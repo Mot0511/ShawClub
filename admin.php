@@ -84,7 +84,23 @@
     .remove:hover{
       background-color: #CE0000;
     }
-
+    .edit{
+      width: 95%;
+      height: 55px;
+      background: #CE0000;
+      border-radius: 20px;
+      border: 0px;
+      margin-left: 10px;
+      margin-top: 10px;
+      color: white;
+      font-size: 20px;
+      transition: background-color 0.2s;
+      margin-top: 20px;
+      margin-left: 0px;
+    }
+    .edit:hover{
+      background-color: #870000;
+    }
     </style>
   </head>
   <body>
@@ -146,8 +162,7 @@
               <div class="orderBts">
               <img src="img/products/'.$data[$i]['image'].'" class="imageProduct" alt="">
               <p>'.$data[$i]['name'].'</p>
-              <button type="button" class="orderNow" name="button">Сразу купить</button>
-              <button type="button" class="addToCart" name="button">В корзину</button>
+              <a href="editProduct.php?id='.$data[$i]['id'].'"><button type="button" class="edit" name="button">Изменить товар</button></a>
               <a href="removeProduct.php?id='.$data[$i]['id'].'"><button type="button" class="remove" name="button">Удалить товар</button></a>
             </div>
           </center>

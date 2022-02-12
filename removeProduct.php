@@ -8,6 +8,7 @@ if ($link == false){
 mysqli_set_charset($link, 'utf8');
 $res = mysqli_query($link, "DELETE FROM products WHERE id=".$id."") or die(mysqli_error($link));
 
+echo '<script>location="admin.php"</script>';
 $link->close();
 
 ?>
