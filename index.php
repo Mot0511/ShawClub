@@ -64,42 +64,33 @@
       <div class="container">
         <p class="heading">Шаурма</p>
         <div class="row">
-          <div class="col-lg-4">
-            <div class="product">
-              <center>
-                <div class="orderBts">
-                <img src="img/products/_1.jpg" class="imageProduct" alt="">
-                <p>Классическая</p>
-                <button type="button" class="orderNow" name="button">Сразу купить</button>
-                <button type="button" class="addToCart" name="button">В корзину</button>
-              </div>
-            </center>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="product">
-              <center>
-              <img src="img/products/_2.jpg" class="imageProduct" alt="">
-              <p>Сырная</p>
-              <div class="orderBts">
-              <button type="button" class="orderNow" name="button">Сразу купить</button>
-              <button type="button" class="addToCart" name="button">В корзину</button>
-            </div>
-              </center>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="product">
-              <center>
-              <img src="img/products/_3.jpg" class="imageProduct" alt="">
-              <p>Домашняя</p>
-              <div class="orderBts">
-              <button type="button" class="orderNow" name="button">Сразу купить</button>
-              <button type="button" class="addToCart" name="button">В корзину</button>
-            </div>
-              </center>
-            </div>
-          </div>
+          <?php
+            $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+            if ($link == false){
+              print(mysqli_connect_error());
+            }
+            mysqli_set_charset($link, 'utf8');
+            $res = mysqli_query($link, "SELECT * FROM products");
+            for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
+            for ($i = 0; $i < count($data); $i++){
+              echo '
+                <div class="col-lg-4">
+                <a href="product.php?name='.$data[$i]['name'].'&compound='.$data[$i]['compound'].'&image='.$data[$i]['image'].'"><div class="product">
+                    <center>
+                      <div class="orderBts">
+                      <img src="img/products/'.$data[$i]['image'].'" class="imageProduct" alt="">
+                      <p>'.$data[$i]['name'].'</p>
+                      <button type="button" class="orderNow" name="button">Сразу купить</button>
+                      <button type="button" class="addToCart" name="button">В корзину</button>
+                    </div>
+                  </center>
+                  </div></a>
+                </div>
+              ';
+            }
+
+            $link->close();
+          ?>
         </div>
 
       </div>
@@ -109,7 +100,7 @@
         <p class="heading">Напитки</p>
         <div class="row">
           <div class="col-lg-4">
-            <div class="product">
+          <a href="product.php">  <div class="product">
               <center>
                 <div class="orderBts">
                 <img src="img/products/4.jpg" class="imageProduct" alt="">
@@ -118,10 +109,10 @@
                 <button type="button" class="addToCart" name="button">В корзину</button>
               </div>
             </center>
-            </div>
+            </div></a>
           </div>
           <div class="col-lg-4">
-            <div class="product">
+          <a href="product.php">  <div class="product">
               <center>
               <img src="img/products/5.jpg" class="imageProduct" alt="">
               <p>Чай</p>
@@ -130,7 +121,7 @@
               <button type="button" class="addToCart" name="button">В корзину</button>
             </div>
               </center>
-            </div>
+            </div></a>
           </div>
 
         </div>
