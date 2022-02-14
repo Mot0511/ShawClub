@@ -5,6 +5,7 @@
     <title>ShawClub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
     <style media="screen">
     .loginBt{
       width: 201px;
@@ -101,6 +102,46 @@
     .edit:hover{
       background-color: #870000;
     }
+    .editBlock{
+      width: 462px;
+      height: 550px;
+      background: #CE0000;
+      border-radius: 20px;
+      position: fixed;
+      left: 35%;
+      display: none;
+    }
+    .editBlock p{
+      font-size: 36px;
+    }
+    .editLabel{
+      color: white;
+      font-size: 24px;
+    }
+    .input{
+      width: 95%;
+      background-color: #3F1A00;
+      height: 55px;
+      border: 0px;
+      border-radius: 10px;
+      font-size: 24px;
+      color: white;
+    }
+    .button{
+      width: 95%;
+      background-color: #562400;
+      height: 55px;
+      border: 0px;
+      border-radius: 10px;
+      font-size: 24px;
+      color: white;
+      margin-top: 20px;
+      transition: background-color 0.2s;
+    }
+    .button:hover{
+      background-color: #3F1A00;
+    }
+
     </style>
   </head>
   <body>
@@ -131,15 +172,28 @@
                   <input type="file" class="form-control" required id="inputImage" name="image" value="">
                 </div>
               </div>
-              <input type="submit" class="btn btn-primary" name="button" value="Добавить товар">
+              <input type="submit" class="btn btn-primary " name="button" value="Добавить товар">
             </form>
 
           </div>
         </div>
       </div>
     </div>
+
     <?php require 'header.html'; ?>
-  </body>
+    <!-- <center><div class="editBlock" id="editBlock">
+      <p>Изменить товар</p>
+      <form class="editForm" action="editProduct" method="post">
+        <label for="name" class="editLabel">Название</label> <br>
+         <input id="name" type="text" class="input" name="editName" id="editName" value="name"><br>
+        <label for="name" class="editLabel">Состав</label> <br>
+         <input id="name" type="text" class="input" name="editCompound" id="editCompound"  value="name"><br>
+      <label for="name" class="editLabel">Картинка</label> <br>
+       <input id="name" type="text" class="input" name="editImage"  value="name"><br>
+       <input type="submit" name="" class="button" value="Изменить продукт" id="editImage">
+      <input type="button" onclick="closeEditBlock" class="button" value="Закрыть">
+      </form>
+    </div></center> -->
   <div class="shawarma" id="shawarma">
     <div class="container">
       <button type="button" class="loginBt" name="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить товар</button>
@@ -162,7 +216,6 @@
               <div class="orderBts">
               <img src="img/products/'.$data[$i]['image'].'" class="imageProduct" alt="">
               <p>'.$data[$i]['name'].'</p>
-              <a href="editProduct.php?id='.$data[$i]['id'].'"><button type="button" class="edit" name="button">Изменить товар</button></a>
               <a href="removeProduct.php?id='.$data[$i]['id'].'"><button type="button" class="remove" name="button">Удалить товар</button></a>
             </div>
           </center>
@@ -173,8 +226,27 @@
 
     $link->close();
   ?>
+  <!-- <a href="javascript:edit(\''.$data[$i]['name'].'\', \''.$data[$i]['compound'].'\', \''.$data[$i]['image'].'\')"><button type="button" class="edit" name="button">Изменить товар</button></a> -->
+
+  <!-- <script type="text/javascript">
+    var editBlock = document.getElementById('editBlock');
+    var editName = document.getElementById('editName');
+    var editCompound = document.getElementById('editCompound');
+    var editImage = document.getElementById('editImage');
+    function edit(name, compound, image) {
+      editBlock.style = 'display: block;';
+      console.log(editName);
+      // editName = name;
+      // editCompound = compound;
+      // editImage = image;
+    }
+    function closeEditBlock() {
+      editBlock.style = 'display: none;';
+    }
+  </script> -->
 </div>
 
 </div>
 </div>
+</body>
 </html>
