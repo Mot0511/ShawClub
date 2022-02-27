@@ -62,7 +62,6 @@
     <?php require 'header.html'; ?>
     <div class="shawarma" id="shawarma">
       <div class="container">
-        <p class="heading">Шаурма</p>
         <div class="row">
           <?php
           if (! function_exists("array_key_last")) {
@@ -101,20 +100,26 @@
               $res = mysqli_query($link, "SELECT * FROM products WHERE category = '".$i."'");
               for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
-              
+              echo '<p class="heading">'.$i.'</p>';
+              foreach ($data as $j){
+                echo '
+                  <div class="col-lg-4">
+                  <a href="product.php?name='.$j['name'].'&compound='.$j[$i]['compound'].'&image='.$j['image'].'"><div class="product">
+                      <center>
+                        <div class="orderBts">
+                        <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
+                        <p>'.$j['name'].'</p>
+                        <button type="button" class="orderNow" name="button">Сразу купить</button>
+                        <button type="button" class="addToCart" name="button">В корзину</button>
+                      </div>
+                    </center>
+                    </div></a>
+                  </div>
+                ';
+
+              }
+
             }
-            // print_r($groups);
-            // echo '<br>';
-            // echo '<br>';
-            // foreach ($groups as $i){
-            //   foreach ($data as $j){
-            //     if ($j['group'] == $i){
-            //       print_r($j);
-            //       echo '<br>';
-            //     }
-            //   }
-            //   echo '<br>';
-            // }
 
 
             $link->close();
