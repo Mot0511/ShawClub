@@ -65,6 +65,61 @@
         <p class="heading">Шаурма</p>
         <div class="row">
           <?php
+          if (! function_exists("array_key_last")) {
+              function array_key_last($array) {
+                  if (!is_array($array) || empty($array)) {
+                      return NULL;
+                  }
+
+                  return array_keys($array)[count($array)-1];
+              }
+          }
+            $groups = [];
+            $groups2 = [];
+            mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+            $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+            if ($link == false){
+              print(mysqli_connect_error());
+            }
+            mysqli_set_charset($link, 'utf8');
+
+            $group = mysqli_query($link, "SELECT * FROM products");
+            for ($cater = []; $row = mysqli_fetch_assoc($group); $cater[] = $row);
+
+            for ($l = 0; $l < count($cater); $l++){
+              array_push($groups2, $cater[$l]['category']);
+            }
+            $groups2 = array_unique($groups2);
+
+            foreach ($groups2 as $i){
+              array_push($groups, $i);
+            }
+
+
+
+            foreach ($groups as $i){
+              $res = mysqli_query($link, "SELECT * FROM products WHERE category = '".$i."'");
+              for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
+
+              
+            }
+            // print_r($groups);
+            // echo '<br>';
+            // echo '<br>';
+            // foreach ($groups as $i){
+            //   foreach ($data as $j){
+            //     if ($j['group'] == $i){
+            //       print_r($j);
+            //       echo '<br>';
+            //     }
+            //   }
+            //   echo '<br>';
+            // }
+
+
+            $link->close();
+          ?>
+          <!-- <?php
             $link = mysqli_connect('localhost', 'root', '', 'shawclub');
             if ($link == false){
               print(mysqli_connect_error());
@@ -90,12 +145,12 @@
             }
 
             $link->close();
-          ?>
+          ?> -->
         </div>
 
       </div>
     </div>
-    <div class="drinks" id="drinks">
+    <!-- <div class="drinks" id="drinks">
       <div class="container">
         <p class="heading">Напитки</p>
         <div class="row">
@@ -126,8 +181,8 @@
 
         </div>
 
-      </div>
-    </div>
+      </div>юэжэжэбд
+    </div> -->
 <?php require 'footer.html'; ?>
   </body>
 </html>
