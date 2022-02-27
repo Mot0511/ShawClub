@@ -70,6 +70,8 @@
       font-size: 36px;
       color: white;
       margin-top: 50px;
+      position: relative;
+      top: 30px;
     }
     .remove{
       width: 95%;
@@ -172,6 +174,12 @@
                   <input type="file" class="form-control" required id="inputImage" name="image" value="">
                 </div>
               </div>
+              <div class="row mb-3">
+                <label for="inputPass" class="col-sm-2 col-form-label">Категория</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" required id="inputCompound" name="group" value="">
+                </div>
+              </div>
               <input type="submit" class="btn btn-primary " name="button" value="Добавить товар">
             </form>
 
@@ -181,70 +189,71 @@
     </div>
 
     <?php require 'header.html'; ?>
-    <!-- <center><div class="editBlock" id="editBlock">
-      <p>Изменить товар</p>
-      <form class="editForm" action="editProduct" method="post">
-        <label for="name" class="editLabel">Название</label> <br>
-         <input id="name" type="text" class="input" name="editName" id="editName" value="name"><br>
-        <label for="name" class="editLabel">Состав</label> <br>
-         <input id="name" type="text" class="input" name="editCompound" id="editCompound"  value="name"><br>
-      <label for="name" class="editLabel">Картинка</label> <br>
-       <input id="name" type="text" class="input" name="editImage"  value="name"><br>
-       <input type="submit" name="" class="button" value="Изменить продукт" id="editImage">
-      <input type="button" onclick="closeEditBlock" class="button" value="Закрыть">
-      </form>
-    </div></center> -->
   <div class="shawarma" id="shawarma">
     <div class="container">
       <button type="button" class="loginBt" name="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить товар</button>
-      <p class="heading">Шаурма</p>
       <div class="row">
 
-<?php
-    $link = mysqli_connect('localhost', 'root', '', 'shawclub');
-    if ($link == false){
-      print(mysqli_connect_error());
-    }
-    mysqli_set_charset($link, 'utf8');
-    $res = mysqli_query($link, "SELECT * FROM products");
-    for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
-    for ($i = 0; $i < count($data); $i++){
-      echo '
-        <div class="col-lg-4">
-        <a href="product.php?name='.$data[$i]['name'].'&compound='.$data[$i]['compound'].'&image='.$data[$i]['image'].'"><div class="product">
-            <center>
-              <div class="orderBts">
-              <img src="img/products/'.$data[$i]['image'].'" class="imageProduct" alt="">
-              <p>'.$data[$i]['name'].'</p>
-              <a href="removeProduct.php?id='.$data[$i]['id'].'"><button type="button" class="remove" name="button">Удалить товар</button></a>
-            </div>
-          </center>
-          </div></a>
-        </div>
-      ';
-    }
+        <?php
+        if (! function_exists("array_key_last")) {
+            function array_key_last($array) {
+                if (!is_array($array) || empty($array)) {
+                    return NULL;
+                }
 
-    $link->close();
-  ?>
-  <!-- <a href="javascript:edit(\''.$data[$i]['name'].'\', \''.$data[$i]['compound'].'\', \''.$data[$i]['image'].'\')"><button type="button" class="edit" name="button">Изменить товар</button></a> -->
+                return array_keys($array)[count($array)-1];
+            }
+        }
+          $groups = [];
+          $groups2 = [];
+          mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+          $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+          if ($link == false){
+            print(mysqli_connect_error());
+          }
+          mysqli_set_charset($link, 'utf8');
 
-  <!-- <script type="text/javascript">
-    var editBlock = document.getElementById('editBlock');
-    var editName = document.getElementById('editName');
-    var editCompound = document.getElementById('editCompound');
-    var editImage = document.getElementById('editImage');
-    function edit(name, compound, image) {
-      editBlock.style = 'display: block;';
-      console.log(editName);
-      // editName = name;
-      // editCompound = compound;
-      // editImage = image;
-    }
-    function closeEditBlock() {
-      editBlock.style = 'display: none;';
-    }
-  </script> -->
-</div>
+          $group = mysqli_query($link, "SELECT * FROM products");
+          for ($cater = []; $row = mysqli_fetch_assoc($group); $cater[] = $row);
+
+          for ($l = 0; $l < count($cater); $l++){
+            array_push($groups2, $cater[$l]['category']);
+          }
+          $groups2 = array_unique($groups2);
+
+          foreach ($groups2 as $i){
+            array_push($groups, $i);
+          }
+
+
+
+          foreach ($groups as $i){
+            $res = mysqli_query($link, "SELECT * FROM products WHERE category = '".$i."'");
+            for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
+
+            echo '<p class="heading">'.$i.'</p>';
+            foreach ($data as $j){
+              echo '
+                <div class="col-lg-4">
+                <a href="product.php?name='.$j['name'].'&compound='.$j[$i]['compound'].'&image='.$j['image'].'"><div class="product">
+                    <center>
+                      <div class="orderBts">
+                      <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
+                      <p>'.$j['name'].'</p>
+                       <a href="removeProduct.php?id='.$j['id'].'"><button type="button" class="orderNow" class="remove" name="button">Удалить</button>
+                    </div>
+                  </center>
+                  </div></a>
+                </div>
+              ';
+
+            }
+
+          }
+
+
+          $link->close();
+        ?></div>
 
 </div>
 </div>

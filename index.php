@@ -19,6 +19,8 @@
       .heading{
         font-size: 36px;
         color: white;
+        position: relative;
+        top: 30px;
       }
       .orderNow{
         width: 134px;
