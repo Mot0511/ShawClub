@@ -127,7 +127,7 @@
             $link->close();
           ?>
           <!-- <?php
-            $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+            $link = mysqli_connect('localhost', 'f0642974_shawclub', 'motik0511', 'shawclub');
             if ($link == false){
               print(mysqli_connect_error());
             }
