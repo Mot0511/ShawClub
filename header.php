@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -43,6 +44,24 @@
       .loginBt:hover{
         background-color: #870000;
       }
+      .profileBt{
+        width: 201px;
+        height: 83px;
+        border: 5px solid #CE0000;
+        border-radius: 20px;
+        background: none;
+        color: white;
+        font-size: 24px;
+        transition: background-color 0.3s;
+        margin-left: 20px;
+      }
+      .profileBt:hover{
+        background-color: #CE0000;
+      }
+      .cart{
+        width: 50px;
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
@@ -84,7 +103,35 @@
           <a href="#drinks">Напитки</a>
         </div>
         <div class="col-lg-4">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="loginBt" name="button" >Войти<br>Регистрация</button>
+          <?php
+          if ($page == 'profile.php'){
+            echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';
+            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button>';
+          }
+          else if($page == 'point.php'){
+            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button>';
+          }
+          else if($page == 'admin.php'){
+            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button>';
+          }
+          else if (!isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
+            echo '<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="loginBt" name="button">Войти<br>Регистрация</button>';
+          }
+          else{
+            if ($_COOKIE['login'] == 'point'){
+              echo '<a href="point.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            }
+            else if($_COOKIE['login'] == 'admin'){
+              echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            }
+            else{
+              echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';
+              echo '<a href="profile.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            }
+          }
+
+          ?>
+
         </div>
       </div>
     </div>

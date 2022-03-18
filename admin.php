@@ -1,3 +1,12 @@
+<?php
+if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
+  $login = $_COOKIE['login'];
+}
+else{
+  echo '<script>location="index.php"</script>';
+}
+$page = basename(__FILE__);
+?>
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
   <head>
@@ -188,7 +197,7 @@
       </div>
     </div>
 
-    <?php require 'header.html'; ?>
+    <?php require 'header.php'; ?>
   <div class="shawarma" id="shawarma">
     <div class="container">
       <button type="button" class="loginBt" name="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить товар</button>

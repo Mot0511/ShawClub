@@ -1,3 +1,12 @@
+<?php
+if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
+  $login = $_COOKIE['login'];
+}
+else{
+  echo '<script>location="index.php"</script>';
+}
+$page = basename(__FILE__);
+?>
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
   <head>
@@ -195,10 +204,7 @@
     </style>
   </head>
   <body>
-    <?php
-      $email = $_GET['email'];
-    ?>
-    <?php require 'header.html'; ?>
+    <?php require 'header.php'; ?>
   <div class="shawarma" id="shawarma">
     <div class="container">
       <p class="heading">Активные заказы</p>

@@ -1,3 +1,9 @@
+<?php
+if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
+  $login = $_COOKIE['login'];
+  $pass = $_COOKIE['pass'];
+}
+?>
 <!DOCTYPE html>
 <html lang="ru" dir="ltr">
   <head>
@@ -61,7 +67,8 @@
     </style>
   </head>
   <body>
-    <?php require 'header.html'; ?>
+
+    <?php require 'header.php'; ?>
     <div class="shawarma" id="shawarma">
       <div class="container">
         <div class="row">
@@ -112,7 +119,7 @@
                         <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
                         <p>'.$j['name'].'</p>
                         <button type="button" class="orderNow" name="button">Сразу купить</button>
-                        <button type="button" class="addToCart" name="button">В корзину</button>
+                        <a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button>
                       </div>
                     </center>
                     </div></a>
@@ -126,70 +133,11 @@
 
             $link->close();
           ?>
-          <!-- <?php
-            $link = mysqli_connect('localhost', 'f0642974_shawclub', 'motik0511', 'shawclub');
-            if ($link == false){
-              print(mysqli_connect_error());
-            }
-            mysqli_set_charset($link, 'utf8');
-            $res = mysqli_query($link, "SELECT * FROM products");
-            for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
-            for ($i = 0; $i < count($data); $i++){
-              echo '
-                <div class="col-lg-4">
-                <a href="product.php?name='.$data[$i]['name'].'&compound='.$data[$i]['compound'].'&image='.$data[$i]['image'].'"><div class="product">
-                    <center>
-                      <div class="orderBts">
-                      <img src="img/products/'.$data[$i]['image'].'" class="imageProduct" alt="">
-                      <p>'.$data[$i]['name'].'</p>
-                      <button type="button" class="orderNow" name="button">Сразу купить</button>
-                      <button type="button" class="addToCart" name="button">В корзину</button>
-                    </div>
-                  </center>
-                  </div></a>
-                </div>
-              ';
-            }
-
-            $link->close();
-          ?> -->
         </div>
 
       </div>
     </div>
-    <!-- <div class="drinks" id="drinks">
-      <div class="container">
-        <p class="heading">Напитки</p>
-        <div class="row">
-          <div class="col-lg-4">
-          <a href="product.php">  <div class="product">
-              <center>
-                <div class="orderBts">
-                <img src="img/products/4.jpg" class="imageProduct" alt="">
-                <p>Кофе "Американо"</p>
-                <button type="button" class="orderNow" name="button">Сразу купить</button>
-                <button type="button" class="addToCart" name="button">В корзину</button>
-              </div>
-            </center>
-            </div></a>
-          </div>
-          <div class="col-lg-4">
-          <a href="product.php">  <div class="product">
-              <center>
-              <img src="img/products/5.jpg" class="imageProduct" alt="">
-              <p>Чай</p>
-              <div class="orderBts">
-              <button type="button" class="orderNow" name="button">Сразу купить</button>
-              <button type="button" class="addToCart" name="button">В корзину</button>
-            </div>
-              </center>
-            </div></a>
-          </div>
 
-        </div>
-
-      </div>юэжэжэбд
-    </div> -->
 <?php require 'footer.html'; ?>
   </body>
 </html>

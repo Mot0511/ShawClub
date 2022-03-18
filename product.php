@@ -52,7 +52,7 @@
 </style>
 </head>
   <body>
-    <?php require 'header.html'; ?>
+    <?php require 'header.php'; ?>
     <?php
     $name = $_GET['name'];
     $compound = $_GET['compound'];

@@ -161,7 +161,8 @@ $page = basename(__FILE__);
     .thing{
       border-radius: 20px;
       background-color: #3F1A00;
-      padding-top: 5px;
+      padding-top: 10px;
+      padding-left: 10px;
       margin-bottom: 20px;
     }
     .thing h2{
@@ -196,6 +197,7 @@ $page = basename(__FILE__);
       background: none;
       transition: background-color 0.3s;
       margin-top: 10px;
+      margin-left: 50px;
       margin-bottom: 10px;
     }
     .cancel:hover{
@@ -208,22 +210,23 @@ $page = basename(__FILE__);
   <div class="shawarma" id="shawarma">
     <div class="container">
       <?php
+        $email = $_GET['email'];
         $link = mysqli_connect('localhost', 'root', '', 'shawclub');
         mysqli_set_charset($link, 'utf8');
 
-        $res = mysqli_query($link, "SELECT * FROM point");
+        $res = mysqli_query($link, "SELECT * FROM cart WHERE email = '".$email."'");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
         foreach ($data as $i){
           echo '
           <div class="row thing">
-            <div class="col-lg-9">
-              <h2>'.$i['products'].'</h2>
-              <p>'.$i['address'].', '.$i['number'].'</p>
+            <div class="col-lg-10 ">
+              <h2>'.$i['name'].'</h2>
             </div>
             <div class="col-lg">
-                <a href="readyOrder.php?'.$i['id'].'"><button type="button" name="button" class="done">Готово</button></a>
-                <a href="cancelOrder.php?'.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+                <form method="post" action="">
+                <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$email.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
+                </form>
             </div>
           </div>
           ';
