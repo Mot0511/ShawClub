@@ -81,9 +81,8 @@ $page = basename(__FILE__);
     .heading{
       font-size: 36px;
       color: white;
-      margin-top: 50px;
       position: relative;
-      top: 30px;
+      top: 0px;
     }
     .remove{
       width: 95%;
@@ -163,6 +162,7 @@ $page = basename(__FILE__);
       background-color: #3F1A00;
       padding-top: 5px;
       margin-bottom: 20px;
+      margin-top: 100px;
     }
     .thing h2{
       font-size: 36px;
@@ -208,11 +208,11 @@ $page = basename(__FILE__);
   <div class="shawarma" id="shawarma">
     <div class="container">
       <p class="heading">Активные заказы</p>
-      <!-- <?php
+      <?php
         $link = mysqli_connect('localhost', 'root', '', 'shawclub');
         mysqli_set_charset($link, 'utf8');
 
-        $res = mysqli_query($link, "SELECT * FROM point");
+        $res = mysqli_query($link, "SELECT * FROM point WHERE email = '".$login."'");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
         foreach ($data as $i){
@@ -220,16 +220,15 @@ $page = basename(__FILE__);
           <div class="row thing">
             <div class="col-lg-9">
               <h2>'.$i['products'].'</h2>
-              <p>'.$i['address'].', '.$i['number'].'</p>
+              <p>Номер заказа: '.$i['number'].'</p>
             </div>
             <div class="col-lg">
-                <a href="readyOrder.php?'.$i['id'].'"><button type="button" name="button" class="done">Готово</button></a>
                 <a href="cancelOrder.php?'.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
             </div>
           </div>
           ';
         }
-      ?> -->
+      ?>
 
       </div>
       </div>

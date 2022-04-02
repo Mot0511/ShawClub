@@ -84,6 +84,7 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
           }
             $groups = [];
             $groups2 = [];
+            $cartProducts = [];
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
             $link = mysqli_connect('localhost', 'root', '', 'shawclub');
             if ($link == false){
@@ -93,6 +94,12 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
 
             $group = mysqli_query($link, "SELECT * FROM products");
             for ($cater = []; $row = mysqli_fetch_assoc($group); $cater[] = $row);
+
+            $cartProduct_res = mysqli_query($link, "SELECT * FROM cart WHERE email = '".$login."'");
+            for ($cartProduct_data = []; $row = mysqli_fetch_assoc($cartProduct_res); $cartProduct_data[] = $row);
+            foreach ($cartProduct_data as $i){
+                array_push($cartProducts, $i['name']);
+            }
 
             for ($l = 0; $l < count($cater); $l++){
               array_push($groups2, $cater[$l]['category']);
@@ -120,11 +127,20 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
                         <p>'.$j['name'].'</p>
                         <button type="button" class="orderNow" name="button">Сразу купить</button>
                         <a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button>
+                        ';
+                        if (in_array($j['name'], $cartProducts)){
+                          $number_res = mysqli_query($link, "SELECT * FROM cart WHERE name = '".$j['name']."' AND email = '".$login."'");
+                          for ($number = []; $row = mysqli_fetch_assoc($number_res); $number[] = $row);
+
+                          echo '<p>Уже есть в корзине</p>';
+                        }
+                        echo '
                       </div>
                     </center>
                     </div></a>
                   </div>
                 ';
+
 
               }
 

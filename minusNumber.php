@@ -9,17 +9,14 @@
 
   $count = $cartProducts[0]['number'];
 
-  if ($cartProducts == []){
-    $res = mysqli_query($link, "INSERT INTO cart SET name = '".$name."', number = 1, email = '".$email."'");
-    echo '<script>location="index.php"</script>';
-  }
-  else{
-    mysqli_query($link, "DELETE FROM cart WHERE id = '".$cartProducts[0]['id']."'");
-    $count = $count + 1;
+
+  mysqli_query($link, "DELETE FROM cart WHERE id = '".$cartProducts[0]['id']."'");
+  $count = $count - 1;
+  if ($count != 0){
     mysqli_query($link, "INSERT INTO cart SET id = '".$cartProducts[0]['id']."', name = '".$name."', number = ".$count.", email = '".$email."' ");
     echo '<script>location="cart.php?email='.$email.'"</script>';
   }
 
-
   $link->close();
+
 ?>

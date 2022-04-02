@@ -203,6 +203,36 @@ $page = basename(__FILE__);
     .cancel:hover{
       background-color: #CE0000;
     }
+    .numberBt{
+      width: 35px;
+      height: 35px;
+      background-color: #CE0000;
+      transition: background-color 0.3s;
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+    .numberBt:hover{
+      background-color: #870000;
+    }
+    .numberControl{
+      width: 250px;
+    }
+    .orderSendBt{
+      width: 100%;
+      height: 50px;
+      font-size: 25px;
+      color: white;
+      border: 0;
+      border-radius: 20px;
+      background-color: #CE0000;
+      transition: background-color 0.3s;
+      margin-top: 50px;
+    }
+    .orderSendBt:hover{
+      background-color: #870000;
+    }
     </style>
   </head>
   <body>
@@ -222,16 +252,29 @@ $page = basename(__FILE__);
           <div class="row thing">
             <div class="col-lg-10 ">
               <h2>'.$i['name'].'</h2>
+              <div class="row numberControl">
+                <div class="col-lg-4">
+                <a href="minusNumber.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">-</button></a>
+                </div>
+                <div class="col-lg-4">
+                  <p>'.$i['number'].' шт.</p>
+                </div>
+                <div class="col-lg-4">
+                <a href="addToCart.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">+</button></a>
+                </div>
+              </div>
+
             </div>
             <div class="col-lg">
                 <form method="post" action="">
                 <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$email.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
                 </form>
             </div>
-          </div>
-          ';
+          </div>          ';
         }
       ?>
+
+      <a href="orderSend.php?email=<?php echo $email; ?>"><button type="button"class="orderSendBt" name="button">Отправить заказ с этими товарами</button></a>
 
       </div>
       </div>

@@ -219,7 +219,7 @@ $page = basename(__FILE__);
           <div class="row thing">
             <div class="col-lg-9">
               <h2>'.$i['products'].'</h2>
-              <p>'.$i['address'].', '.$i['number'].'</p>
+              <p>'.$i['number'].'</p>
             </div>
             <div class="col-lg">
                 <a href="readyOrder.php?'.$i['id'].'"><button type="button" name="button" class="done">Готово</button></a>
