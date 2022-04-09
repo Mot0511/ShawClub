@@ -12,6 +12,6 @@
   }
 
   $number = rand(0, 999999);
-  mysqli_query($link, "INSERT INTO point SET products = '".$product."', number = '".$number."', email = '".$email."'");
+  mysqli_query($link, "INSERT INTO point SET products = '".$product."', number = '".$number."', email = '".$email."', status = 0");
   echo '<script>location="profile.php"</script>';
 ?>

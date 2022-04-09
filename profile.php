@@ -221,9 +221,28 @@ $page = basename(__FILE__);
             <div class="col-lg-9">
               <h2>'.$i['products'].'</h2>
               <p>Номер заказа: '.$i['number'].'</p>
-            </div>
-            <div class="col-lg">
-                <a href="cancelOrder.php?'.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+              ';
+              if ($i['status'] == '0'){
+                echo '<p style="color: yellow;">Заказ в обработке</p>
+                </div>
+                <div class="col-lg">
+                    <a href="cancelOrder.php?id='.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+                ';
+              }
+              else if($i['status'] == '1'){
+                echo '<p>Заказ принят и выполняется</p>
+                </div>
+                <div class="col-lg">
+                    <a href="cancelOrder.php?id='.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+                ';
+              }
+              else if($i['status'] == '2'){
+                echo '<p style="color: green;">Заказ выполнен, можете идти забирать</p>';
+              }
+              else if($i['status'] == '3'){
+                echo '<p style="color: red;">Заказ отменен</p>';
+              }
+              echo '
             </div>
           </div>
           ';

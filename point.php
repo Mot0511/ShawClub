@@ -163,6 +163,7 @@ $page = basename(__FILE__);
       background-color: #3F1A00;
       padding-top: 5px;
       margin-bottom: 20px;
+      padding-bottom: 5px;
     }
     .thing h2{
       font-size: 36px;
@@ -201,6 +202,19 @@ $page = basename(__FILE__);
     .cancel:hover{
       background-color: #CE0000;
     }
+    .statusBt{
+      width: 268px;
+      height: 55px;
+      background-color: #CE0000;
+      transition: background-color 0.3s;
+      border: 0px;
+      border-radius: 20px;
+      color: white;
+      font-size: 20px;
+    }
+    .statusBt:hover{
+      background-color: #870000;
+    }
     </style>
   </head>
   <body>
@@ -217,21 +231,35 @@ $page = basename(__FILE__);
         foreach ($data as $i){
           echo '
           <div class="row thing">
-            <div class="col-lg-9">
+            <div class="col-lg-6">
               <h2>'.$i['products'].'</h2>
               <p>'.$i['number'].'</p>
             </div>
-            <div class="col-lg">
-                <a href="readyOrder.php?'.$i['id'].'"><button type="button" name="button" class="done">Готово</button></a>
-                <a href="cancelOrder.php?'.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
-            </div>
-          </div>
-          ';
+            <div class="col-lg-6">
+            ';
+            if ($i['status'] == 0){
+              echo '
+              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
+              ';
+            }
+            else if($i['status'] == 1){
+              echo '
+              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=2&id='.$i['id'].'"><button type="button" name="button" class="done">Готово</button></a>
+              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=3&id='.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+              ';
+            }
+            else if($i['status'] == 2){
+              echo '<br><h2 style="color: green;">Заказ выполнен</h2>';
+            }
+            else if($i['status'] == 3){
+              echo '<br><h2 style="color: red;">Заказ отменен</h2>';
+            }
         }
       ?>
-
-      </div>
-      </div>
+    </div>
+  </div>
+  </div>
+  </div>
 
 
 </body>
