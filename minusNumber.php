@@ -1,8 +1,10 @@
 <?php
+$DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+
   $name = $_GET['name'];
   $email = $_GET['email'];
 
-  $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+  $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
   mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
   $cartProducts_res = mysqli_query($link, "SELECT * FROM cart WHERE email = '".$email."' AND name = '".$name."'");
   for ($cartProducts = []; $row = mysqli_fetch_assoc($cartProducts_res); $cartProducts[] = $row);

@@ -73,6 +73,8 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
       <div class="container">
         <div class="row">
           <?php
+          $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+
           if (! function_exists("array_key_last")) {
               function array_key_last($array) {
                   if (!is_array($array) || empty($array)) {
@@ -86,7 +88,7 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
             $groups2 = [];
             $cartProducts = [];
             mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-            $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+            $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
             if ($link == false){
               print(mysqli_connect_error());
             }

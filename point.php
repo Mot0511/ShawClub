@@ -222,7 +222,9 @@ $page = basename(__FILE__);
   <div class="shawarma" id="shawarma">
     <div class="container">
       <?php
-        $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+      $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+
+      $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
         $res = mysqli_query($link, "SELECT * FROM point");

@@ -1,4 +1,6 @@
 <?php
+$DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $email = $_POST['email'];
 $pass = $_POST['pass'];
@@ -16,7 +18,7 @@ else if ($email == 'point' && $pass = '1324'){
   exit;
 }
 
-$link = mysqli_connect('localhost', 'root', '', 'shawclub');
+$link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
 mysqli_set_charset($link, 'utf8');
 
 $existsEmail = false;

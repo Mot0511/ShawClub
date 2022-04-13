@@ -168,25 +168,25 @@ $page = basename(__FILE__);
               <div class="row mb-3">
                 <label for="inputEmail" class="col-sm-2 col-form-label">Название</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" required id="inputName" name="name" value="">
+                  <input type="text" class="form-control" required id="inputName" name="name" value="" autocomplete="off">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPass" class="col-sm-2 col-form-label">Состав</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" required id="inputCompound" name="compound" value="">
+                  <input type="text" class="form-control" required id="inputCompound" name="compound" value="" autocomplete="off">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPass" class="col-sm-2 col-form-label">Картинка</label>
                 <div class="col-sm-10">
-                  <input type="file" class="form-control" required id="inputImage" name="image" value="">
+                  <input type="file" class="form-control" required id="inputImage" name="image" value="" autocomplete="off">
                 </div>
               </div>
               <div class="row mb-3">
                 <label for="inputPass" class="col-sm-2 col-form-label">Категория</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" required id="inputCompound" name="group" value="">
+                  <input type="text" class="form-control" required id="inputCompound" name="group" value="" autocomplete="off">
                 </div>
               </div>
               <input type="submit" class="btn btn-primary " name="button" value="Добавить товар">
@@ -204,6 +204,8 @@ $page = basename(__FILE__);
       <div class="row">
 
         <?php
+        $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+
         if (! function_exists("array_key_last")) {
             function array_key_last($array) {
                 if (!is_array($array) || empty($array)) {
@@ -216,7 +218,7 @@ $page = basename(__FILE__);
           $groups = [];
           $groups2 = [];
           mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-          $link = mysqli_connect('localhost', 'root', '', 'shawclub');
+          $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
           if ($link == false){
             print(mysqli_connect_error());
           }
