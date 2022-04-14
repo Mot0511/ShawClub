@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -114,21 +113,23 @@
           else if($page == 'admin.php'){
             echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
           }
-          else if (!isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
+
+          else if (!isset($_COOKIE['login']) or !isset($_COOKIE['pass'])){
+
             echo '<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="loginBt" name="button">Войти<br>Регистрация</button></a>';
           }
-          else{
-            if ($_COOKIE['login'] == 'point'){
-              echo '<a href="point.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
-            }
-            else if($_COOKIE['login'] == 'admin'){
-              echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
-            }
-            else{
-              echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';
-              echo '<a href="profile.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
-            }
+          else if ($_COOKIE['login'] == 'point'){
+            echo '<a href="point.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
+          else if($_COOKIE['login'] == 'admin'){
+            echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+          }
+
+          else{
+            echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';
+            echo '<a href="profile.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+          }
+
 
           ?>
 

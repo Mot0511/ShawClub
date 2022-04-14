@@ -3,7 +3,7 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
   $login = $_COOKIE['login'];
 }
 else{
-  echo '<script>location="index.php"</script>';
+  $login = $_SERVER['REMOTE_ADDR'];
 }
 $page = basename(__FILE__);
 ?>
@@ -269,14 +269,21 @@ $page = basename(__FILE__);
             </div>
             <div class="col-lg">
                 <form method="post" action="">
-                <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$email.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
+                <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$login.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
                 </form>
             </div>
           </div>          ';
         }
       ?>
 
-      <a href="orderSend.php?email=<?php echo $email; ?>"><button type="button"class="orderSendBt" name="button">Отправить заказ с этими товарами</button></a>
+      <?php
+        if ($_COOKIE['login'] == ''){
+          echo '<button type="button" class="orderSendBt" name="button" data-bs-toggle="modal" data-bs-target="#exampleModal" name="button">Отправить заказ с этими товарами</button>';
+        }
+        else{
+          echo '<a href="orderSend.php?email=<?php echo $login; ?>"><button type="button"class="orderSendBt" name="button">Отправить заказ с этими товарами</button></a>';
+        }
+      ?>
 
       </div>
       </div>

@@ -42,12 +42,12 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
         background-color: #CE0000;
       }
       .addToCart{
-        width: 134px;
+        width: 90%;
         height: 55px;
         background: #CE0000;
         border-radius: 20px;
         border: 0px;
-        margin-left: 10px;
+        margin-left: px;
         margin-top: 10px;
         color: white;
         font-size: 20px;
@@ -122,19 +122,21 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
               foreach ($data as $j){
                 echo '
                   <div class="col-lg-4">
-                  <a href="product.php?name='.$j['name'].'&compound='.$j[$i]['compound'].'&image='.$j['image'].'"><div class="product">
+                  <a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><div class="product">
                       <center>
                         <div class="orderBts">
                         <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
                         <p>'.$j['name'].'</p>
-                        <button type="button" class="orderNow" name="button">Сразу купить</button>
-                        <a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button>
-                        ';
-                        if (in_array($j['name'], $cartProducts)){
-                          $number_res = mysqli_query($link, "SELECT * FROM cart WHERE name = '".$j['name']."' AND email = '".$login."'");
-                          for ($number = []; $row = mysqli_fetch_assoc($number_res); $number[] = $row);
 
-                          echo '<p>Уже есть в корзине</p>';
+                        </a>';
+                        if ($_COOKIE['login'] == ''){
+                          echo '<button type="submit" class="addToCart"  name="button" data-bs-toggle="modal" data-bs-target="#exampleModal" name="addToCart">В корзину</button>';
+                        }
+                        else {
+                          echo '<a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
+                        }
+                        if (in_array($j['name'], $cartProducts)){
+                          echo '<a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><p>Уже есть в корзине</p>';
                         }
                         echo '
                       </div>

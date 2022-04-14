@@ -37,6 +37,11 @@ if (!$existsEmail){
   mysqli_query($link, "INSERT INTO users SET email='".$email."', password='".$pass."'");
   setcookie('login', $email, time() + (86400 * 30), '/');
   setcookie('pass', $pass, time() + (86400 * 30), '/');
+  // $cartElems_res = mysqli_query($link, 'SELECT email FROM users');
+  // for ($cartElems = []; $row = mysqli_fetch_assoc($cartElems_res); $cartElems[] = $row);
+  // foreach ($cartElems as $i){
+  //   $res = mysqli_query($link, "INSERT INTO cart SET name = '".$i['name']."', number = ".$i['number'].", email = '".$email."'");
+  // }
   echo '<script>location="profile.php?email='.$email.'"</script>';
 }
 else{
@@ -46,6 +51,11 @@ else{
   if ($password[0]['password'] == $pass){
     setcookie('login', $email, time() + (86400 * 30), '/');
     setcookie('pass', $pass, time() + (86400 * 30), '/');
+    // $cartElems_res = mysqli_query($link, 'SELECT email FROM users');
+    // for ($cartElems = []; $row = mysqli_fetch_assoc($cartElems_res); $cartElems[] = $row);
+    // foreach ($cartElems as $i){
+    //     mysqli_query($link, "INSERT INTO cart SET name = '".$i['name']."', number = ".$i['number'].", email = '".$email."'");
+    // }
     echo '<script>location="profile.php?email='.$email.'"</script>';
   }
   else{

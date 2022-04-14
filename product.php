@@ -21,13 +21,13 @@
   background-color: #CE0000;
 }
 .addToCart{
-  width: 49%;
+  width: 100%;
   height: 55px;
   background: #CE0000;
   border-radius: 20px;
   border: 0px;
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 50px;
   color: white;
   font-size: 20px;
   transition: background-color 0.2s;
@@ -57,6 +57,7 @@
     $name = $_GET['name'];
     $compound = $_GET['compound'];
     $image = $_GET['image'];
+    $email = $_GET['email'];
     ?>
     <div class="container">
       <div class="row">
@@ -70,8 +71,7 @@
         </div>
       </div>
       <div class="orderBts">
-      <button type="button" class="orderNow" name="button">Сразу купить</button>
-      <button type="button" class="addToCart" name="button">В корзину</button>
+    <a href="addToCart.php?name=<?php echo $name; ?>&email=<?php echo $email; ?>"> <button type="button" class="addToCart" name="button">В корзину</button></a> 
     </div>
     </div>
     <?php require 'footer.html'; ?>
