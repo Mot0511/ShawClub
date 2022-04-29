@@ -2,6 +2,11 @@
 if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
   $login = $_COOKIE['login'];
   $pass = $_COOKIE['pass'];
+
+  $btAddToCart = 1;
+  if ($login == 'admin' or $login == 'point'){
+    $btAddToCart = 0;
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -11,7 +16,9 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
     <title>ShawClub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <style media="screen">
+    <link rel="stylesheet" href="" id="linkCSS">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style media="screen" id='css'>
       .shawarma{
         margin-top: 95px;
       }
@@ -64,10 +71,20 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
       .product p{
         font-size: 20px;
       }
+
     </style>
   </head>
   <body>
-
+    <script type="text/javascript">
+      css = document.getElementById('css').innerHTML;
+      if (window.innerWidth < 1000){
+        document.getElementById('css').innerHTML = '';
+        document.getElementById('linkCSS').setAttribute('href', 'mobileCSS/index.css');
+      }
+      else{
+        document.getElementById('css').innerHTML = css;
+      }
+    </script>
     <?php require 'header.php'; ?>
     <div class="shawarma" id="shawarma">
       <div class="container">
@@ -113,12 +130,13 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
             }
 
 
-
+            $id = 0;
             foreach ($groups as $i){
               $res = mysqli_query($link, "SELECT * FROM products WHERE category = '".$i."'");
               for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
-              echo '<p class="heading">'.$i.'</p>';
+              echo '<p class="heading" id="'.$id.'">'.$i.'</p>';
+              $id += 1;
               foreach ($data as $j){
                 echo '
                   <div class="col-lg-4">
@@ -130,14 +148,17 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
 
                         </a>';
                         if ($_COOKIE['login'] == ''){
-                          echo '<button type="submit" class="addToCart"  name="button" data-bs-toggle="modal" data-bs-target="#exampleModal" name="addToCart">В корзину</button>';
+                          echo '<button type="submit" class="addToCart" name="button" data-bs-toggle="modal" data-bs-target="#exampleModal" name="addToCart">В корзину</button>';
                         }
-                        else {
-                          echo '<a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
+                        else{
+                          if ($btAddToCart == 1){
+                            echo '<a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
+                            if (in_array($j['name'], $cartProducts)){
+                              echo '<a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><p>Уже есть в корзине</p>';
+                            }
+                          }
                         }
-                        if (in_array($j['name'], $cartProducts)){
-                          echo '<a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><p>Уже есть в корзине</p>';
-                        }
+
                         echo '
                       </div>
                     </center>

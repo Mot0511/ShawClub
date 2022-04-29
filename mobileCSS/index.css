@@ -1,0 +1,52 @@
+.shawarma{
+  margin-top: 95px;
+}
+.product{
+  background: #3F1A00;
+  border-radius: 20px;
+  width: 297px;
+  padding-bottom: 20px;
+  margin-top: 25px;
+}
+.heading{
+  font-size: 36px;
+  color: white;
+  position: relative;
+  top: 30px;
+}
+.orderNow{
+  width: 134px;
+  height: 55px;
+  border: 5px solid #CE0000;
+  border-radius: 20px;
+  background: none;
+  color: white;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+.orderNow:hover{
+  background-color: #CE0000;
+}
+.addToCart{
+  width: 90%;
+  height: 55px;
+  background: #CE0000;
+  border-radius: 20px;
+  border: 0px;
+  margin-left: px;
+  margin-top: 10px;
+  color: white;
+  font-size: 20px;
+  transition: background-color 0.2s;
+}
+.addToCart:hover{
+  background-color: #870000;
+}
+.imageProduct{
+  margin-top: 20px;
+  width: 80%;
+  border-radius: 20px;
+}
+.product p{
+  font-size: 20px;
+}

@@ -17,6 +17,12 @@ else if ($email == 'point' && $pass = '1324'){
   echo '<script>location="point.php"</script>';
   exit;
 }
+else if ($email == 'carrier' && $pass = '1324'){
+  setcookie('login', $email, time() + (86400 * 30), '/');
+  setcookie('pass', $pass, time() + (86400 * 30), '/');
+  echo '<script>location="carrier.php"</script>';
+  exit;
+}
 
 $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
 mysqli_set_charset($link, 'utf8');

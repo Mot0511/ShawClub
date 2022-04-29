@@ -15,6 +15,7 @@ $page = basename(__FILE__);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style media="screen">
     body{
       overflow: hidden;
@@ -239,10 +240,18 @@ $page = basename(__FILE__);
                 ';
               }
               else if($i['status'] == '2'){
-                echo '<p style="color: green;">Заказ выполнен, можете идти забирать</p>';
+                echo '<p style="color: green;">Заказ выполнен, курьер в пути</p>';
               }
               else if($i['status'] == '3'){
                 echo '<p style="color: red;">Заказ отменен</p>';
+              }
+              else if($i['status'] == 4){
+                echo '
+                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier"><button type="button" name="button" class="done">Готово</button></a>
+                ';
+              }
+              else if($i['status'] == 5){
+                echo '<p style="color: green;">Вы получили заказ</p>';
               }
               echo '
             </div>

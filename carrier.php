@@ -3,7 +3,7 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
   $login = $_COOKIE['login'];
 }
 else{
-  $login = $_SERVER['REMOTE_ADDR'];
+  echo '<script>location="index.php"</script>';
 }
 $page = basename(__FILE__);
 ?>
@@ -15,6 +15,7 @@ $page = basename(__FILE__);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style media="screen">
     body{
       overflow: hidden;
@@ -161,9 +162,9 @@ $page = basename(__FILE__);
     .thing{
       border-radius: 20px;
       background-color: #3F1A00;
-      padding-top: 10px;
-      padding-left: 10px;
+      padding-top: 5px;
       margin-bottom: 20px;
+      padding-bottom: 5px;
     }
     .thing h2{
       font-size: 36px;
@@ -197,40 +198,22 @@ $page = basename(__FILE__);
       background: none;
       transition: background-color 0.3s;
       margin-top: 10px;
-      margin-left: 50px;
       margin-bottom: 10px;
     }
     .cancel:hover{
       background-color: #CE0000;
     }
-    .numberBt{
-      width: 35px;
-      height: 35px;
+    .statusBt{
+      width: 268px;
+      height: 55px;
       background-color: #CE0000;
       transition: background-color 0.3s;
+      border: 0px;
+      border-radius: 20px;
       color: white;
-      border: 0;
-      border-radius: 10px;
       font-size: 20px;
     }
-    .numberBt:hover{
-      background-color: #870000;
-    }
-    .numberControl{
-      width: 250px;
-    }
-    .orderSendBt{
-      width: 100%;
-      height: 50px;
-      font-size: 25px;
-      color: white;
-      border: 0;
-      border-radius: 20px;
-      background-color: #CE0000;
-      transition: background-color 0.3s;
-      margin-top: 50px;
-    }
-    .orderSendBt:hover{
+    .statusBt:hover{
       background-color: #870000;
     }
     </style>
@@ -241,47 +224,48 @@ $page = basename(__FILE__);
     <div class="container">
       <?php
       $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+      mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-        $email = $_GET['email'];
-        $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
+      $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
-        $res = mysqli_query($link, "SELECT * FROM cart WHERE email = '".$email."'");
+        $res = mysqli_query($link, "SELECT * FROM point");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
         foreach ($data as $i){
-          echo '
-          <div class="row thing">
-            <div class="col-lg-10 ">
-              <h2>'.$i['name'].'</h2>
-              <div class="row numberControl">
-                <div class="col-lg-4">
-                <a href="minusNumber.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">-</button></a>
-                </div>
-                <div class="col-lg-4">
-                  <p>'.$i['number'].' шт.</p>
-                </div>
-                <div class="col-lg-4">
-                <a href="addToCart.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">+</button></a>
-                </div>
+          if ($i['status'] == 2 or $i['status'] == 4 or $i['status'] == 5){
+            echo '
+            <div class="row thing">
+              <div class="col-lg-6">
+                <h2>'.$i['products'].'</h2>
+                <p>'.$i['number'].'</p>
               </div>
+              <div class="col-lg-6">
+              ';
+              if ($i['status'] == 2){
+                echo '
+                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier"><button type="button" name="button" class="statusBt">Принять</button> </a>
+                ';
+              }
+              else if($i['status'] == 4){
+                echo '
+                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier"><button type="button" name="button" class="done">Готово</button></a>
+                ';
+              }
+              else if($i['status'] == 5){
+                echo '<br><h2 style="color: green;">Заказ доставвлен</h2>';
+              }
+              echo '
+              </div>
+            </div>
+              ';
+          }
 
-            </div>
-            <div class="col-lg">
-                <form method="post" action="">
-                <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$login.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
-                </form>
-            </div>
-          </div>          ';
-        }
+          }
       ?>
 
-      <?php
-          echo '<a href="orderSend.php?email='.$email.'"><button type="button"class="orderSendBt" name="button">Отправить заказ с этими товарами</button></a>';
-      ?>
-
-      </div>
-      </div>
+  </div>
+  </div>
 
 
 </body>
