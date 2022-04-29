@@ -1,7 +1,8 @@
 <?php
 $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
 
-  $email = $_GET['email'];
+  $email = $_POST['email'];
+  $address = $_POST['address'];
   $product = '';
 
   $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
@@ -14,6 +15,6 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
   }
 
   $number = rand(0, 999999);
-  mysqli_query($link, "INSERT INTO point SET products = '".$product."', number = '".$number."', email = '".$email."', status = 0");
+  mysqli_query($link, "INSERT INTO point SET products = '".$product."', number = '".$number."', email = '".$email."', status = 0, address = '".$address."'");
   echo '<script>location="profile.php"</script>';
 ?>

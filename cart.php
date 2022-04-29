@@ -233,6 +233,19 @@ $page = basename(__FILE__);
     .orderSendBt:hover{
       background-color: #870000;
     }
+    .address{
+      width: 100%;
+      height: 40px;
+      background-color: #3F1A00;
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      margin-left: -10px;
+    }
+    .address::placeholder{
+      color: white;
+      font-size: 20px;
+    }
     </style>
   </head>
   <body>
@@ -276,9 +289,12 @@ $page = basename(__FILE__);
         }
       ?>
 
-      <?php
-          echo '<a href="orderSend.php?email='.$email.'"><button type="button"class="orderSendBt" name="button">Отправить заказ с этими товарами</button></a>';
-      ?>
+      <form class="" action="orderSend.php" method="post">
+        <input type="hidden" name="email" value="<?php echo $email; ?>">
+        <input type="text" class="address" name="address" placeholder="Введите адрес доставки (город, улица, дом, квартира, код домофона)"><br>
+        <input type="submit" name="" class="orderSendBt" value="Отправить заказ с этими товарами">
+      </form>
+
 
       </div>
       </div>

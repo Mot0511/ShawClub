@@ -238,18 +238,18 @@ $page = basename(__FILE__);
             <div class="row thing">
               <div class="col-lg-6">
                 <h2>'.$i['products'].'</h2>
-                <p>'.$i['number'].'</p>
+                <p>'.$i['number'].', '.$i['address'].'</p>
               </div>
               <div class="col-lg-6">
               ';
               if ($i['status'] == 2){
                 echo '
-                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier"><button type="button" name="button" class="statusBt">Принять</button> </a>
+                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
                 ';
               }
               else if($i['status'] == 4){
                 echo '
-                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier"><button type="button" name="button" class="done">Готово</button></a>
+                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier&address='.$i['address'].'"><button type="button" name="button" class="done">Готово</button></a>
                 ';
               }
               else if($i['status'] == 5){
