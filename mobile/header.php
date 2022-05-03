@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <style media="screen">
       .label{
-        font-size: 48px;
+        font-size: 150px;
         text-decoration: none;
       }
       p, a{
@@ -25,7 +25,7 @@
         margin-top: 30px;
       }
       .menu a{
-        font-size: 24px;
+        font-size: 60px;
         margin-left: 27px;
       }
       .menu{
@@ -33,7 +33,7 @@
         width: 380px;
       }
       .loginBt{
-        width: 201px;
+        width: 100%;
         height: 77px;
         background-color: #CE0000;
         transition: background-color 0.3s;
@@ -63,14 +63,19 @@
         width: 50px;
         margin-top: 20px;
       }
-      @media (max-width: 1000px){
-        .label{
-
-        }
-      }
     </style>
   </head>
   <body>
+    <!-- <script type="text/javascript">
+      css = document.getElementById('css').innerHTML;
+      if (window.innerWidth < 1000){
+        document.getElementById('css').innerHTML = '';
+        document.getElementById('headerLinkCSS').setAttribute('href', 'mobileCSS/header.css');
+      }
+      else{
+        document.getElementById('css').innerHTML = css;
+      }
+    </script> -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -101,10 +106,10 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-4 labelDiv">
+        <div class="col-lg-4">
         <a href="index.php" class="label">ShawClub</a>
         </div>
-        <div class="col-md-4 menu">
+        <div class="col-lg-4 menu">
           <?php
           $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
 
@@ -136,37 +141,34 @@
           }
           ?>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4">
           <?php
-          if ($page == 'profile.php'){
-            echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';
-            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
+          if ($page == '../profile.php'){
+            echo '<a href="../cart.php?email='.$_COOKIE['login'].'"><img src="../img/cart.png" class="cart" alt=""> </a>';
+            echo '<a href="../exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
           }
-          else if($page == 'point.php'){
-            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
+          else if($page == '../point.php'){
+            echo '<a href="../exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
           }
-          else if($page == 'admin.php'){
-            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
-          }
-          else if($page == 'carrier.php'){
-            echo '<a href="exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
+          else if($page == '../admin.php'){
+            echo '<a href="../exitProfile.php"><button type="button" class="profileBt" name="button">Выйти из</br>аккаунта</button></a>';
           }
 
           else if (!isset($_COOKIE['login']) or !isset($_COOKIE['pass'])){
             echo '<button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="loginBt" name="button">Войти<br>Регистрация</button></a>';
           }
           else if ($_COOKIE['login'] == 'point'){
-            echo '<a href="point.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            echo '<a href="../point.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
           else if($_COOKIE['login'] == 'admin'){
-            echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            echo '<a href="../admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
           else if($_COOKIE['login'] == 'carrier'){
-            echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            echo '<a href="../admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
           else{
-            echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';
-            echo '<a href="profile.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            echo '<a href="../cart.php?email='.$_COOKIE['login'].'"><img src="../img/cart.png" class="cart" alt=""> </a>';
+            echo '<a href="../profile.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
 
 

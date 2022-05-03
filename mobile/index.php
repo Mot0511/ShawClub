@@ -19,7 +19,7 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
     <link rel="stylesheet" href="" id="linkCSS">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style media="screen" id='css'>
-      .products{
+      .shawarma{
         margin-top: 95px;
       }
       .product{
@@ -71,32 +71,25 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
       .product p{
         font-size: 20px;
       }
-      @media (max-width: 1000px){
-        .heading{
-          font-size: 60px;
-        }
-        .product{
-          width: 100%;
-        }
-        .product p{
-          font-size: 40px;
-        }
-        .addToCart{
-          font-size: 35px;
-          height: 80px;
-        }
-
-      }
     </style>
   </head>
   <body>
-
+    <!-- <script type="text/javascript">
+      css = document.getElementById('css').innerHTML;
+      if (window.innerWidth < 1000){
+        document.getElementById('css').innerHTML = '';
+        document.getElementById('linkCSS').setAttribute('href', 'mobileCSS/index.css');
+      }
+      else{
+        document.getElementById('css').innerHTML = css;
+      }
+    </script> -->
     <?php require 'header.php'; ?>
-    <div class="products" id="products">
+    <div class="shawarma" id="shawarma">
       <div class="container">
         <div class="row">
           <?php
-          $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+          $DBdata = [file_get_contents('../data/hostDB.txt'), file_get_contents('../data/loginDB.txt'), file_get_contents('../data/passwordDB.txt'), file_get_contents('../data/nameDB.txt')];
 
           if (! function_exists("array_key_last")) {
               function array_key_last($array) {
@@ -149,7 +142,7 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
                   <a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><div class="product">
                       <center>
                         <div class="orderBts">
-                        <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
+                        <img src="../img/products/'.$j['image'].'" class="imageProduct" alt="">
                         <p>'.$j['name'].'</p>
 
                         </a>';
@@ -158,9 +151,9 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
                         }
                         else{
                           if ($btAddToCart == 1){
-                            echo '<a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
+                            echo '<a href="../addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
                             if (in_array($j['name'], $cartProducts)){
-                              echo '<a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><p>Уже есть в корзине</p>';
+                              echo '<a href="../product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><p>Уже есть в корзине</p>';
                             }
                           }
                         }

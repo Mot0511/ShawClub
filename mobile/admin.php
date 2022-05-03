@@ -153,25 +153,7 @@ $page = basename(__FILE__);
     .button:hover{
       background-color: #3F1A00;
     }
-    @media (max-width: 1000px){
-      .loginBt{
-        width: 100%;
-        font-size: 50px;
-      }
-      .product{
-        width: 100%;
-      }
-      .product p{
-        font-size: 40px;
-      }
-      .remove{
-        width: 500px;
-        font-size: 30px;
-      }
-      .heading{
-          font-size: 60px;
-      }
-      }
+
     </style>
   </head>
   <body>

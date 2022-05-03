@@ -246,6 +246,47 @@ $page = basename(__FILE__);
       color: white;
       font-size: 20px;
     }
+    @media (max-width: 1000px){
+      .thing{
+        width: 130%;
+        position: relative;
+        left: -100px;
+      }
+      .thing h2{
+        font-size: 70px;
+      }
+      .thing p{
+        font-size: 50px;
+      }
+      .numberBt{
+        width: 100px;
+        height: 100px;
+        font-size: 70px;
+      }
+      .cancel{
+        width: 100%;
+        height: 90px;
+        margin-left: -10px;
+        font-size: 50px;
+      }
+      .address{
+        width: 130%;
+        height: 90px;
+        position: relative;
+        left: -100px;
+        font-size: 40px;
+      }
+      .address::placeholder{
+        font-size: 28px;
+      }
+      .orderSendBt{
+        width: 130%;
+        height: 90px;
+        position: relative;
+        left: -100px;
+        font-size: 50px;
+      }
+    }
     </style>
   </head>
   <body>
@@ -269,13 +310,14 @@ $page = basename(__FILE__);
               <h2>'.$i['name'].'</h2>
               <div class="row numberControl">
                 <div class="col-lg-4">
-                <a href="minusNumber.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">-</button></a>
+                <a href="addToCart.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">+</button></a>
+
                 </div>
                 <div class="col-lg-4">
                   <p>'.$i['number'].' шт.</p>
                 </div>
                 <div class="col-lg-4">
-                <a href="addToCart.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">+</button></a>
+                <a href="minusNumber.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">-</button></a>
                 </div>
               </div>
 

@@ -82,9 +82,8 @@ $page = basename(__FILE__);
     .heading{
       font-size: 36px;
       color: white;
-      margin-top: 50px;
       position: relative;
-      top: 30px;
+      top: 0px;
     }
     .remove{
       width: 95%;
@@ -164,7 +163,7 @@ $page = basename(__FILE__);
       background-color: #3F1A00;
       padding-top: 5px;
       margin-bottom: 20px;
-      padding-bottom: 5px;
+      margin-top: 100px;
     }
     .thing h2{
       font-size: 36px;
@@ -203,84 +202,66 @@ $page = basename(__FILE__);
     .cancel:hover{
       background-color: #CE0000;
     }
-    .statusBt{
-      width: 268px;
-      height: 55px;
-      background-color: #CE0000;
-      transition: background-color 0.3s;
-      border: 0px;
-      border-radius: 20px;
-      color: white;
-      font-size: 20px;
-    }
-    .statusBt:hover{
-      background-color: #870000;
-    }
-    @media (max-width: 1000px){
-      .thing h2{
-        font-size: 50px;
-        color: white;
-      }
-      .thing p{
-        font-size: 40px;
-      }
-      .done, .statusBt{
-        width: 100%;
-        height: 60px;
-        font-size: 35px;
-      }
-
-    }
     </style>
   </head>
   <body>
     <?php require 'header.php'; ?>
   <div class="shawarma" id="shawarma">
     <div class="container">
+      <p class="heading">Активные заказы</p>
       <?php
       $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
-      mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
       $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
-        $res = mysqli_query($link, "SELECT * FROM point");
+        $res = mysqli_query($link, "SELECT * FROM point WHERE email = '".$login."'");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
         foreach ($data as $i){
-          if ($i['status'] == 2 or $i['status'] == 4 or $i['status'] == 5){
-            echo '
-            <div class="row thing">
-              <div class="col-lg-6">
-                <h2>'.$i['products'].'</h2>
-                <p>'.$i['number'].', '.$i['address'].'</p>
-              </div>
-              <div class="col-lg-6">
+          echo '
+          <div class="row thing">
+            <div class="col-lg-9">
+              <h2>'.$i['products'].'</h2>
+              <p>Номер заказа: '.$i['number'].'</p>
               ';
-              if ($i['status'] == 2){
-                echo '
-                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
+              if ($i['status'] == '0'){
+                echo '<p style="color: yellow;">Заказ в обработке</p>
+                </div>
+                <div class="col-lg">
+                    <a href="cancelOrder.php?id='.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
                 ';
+              }
+              else if($i['status'] == '1'){
+                echo '<p>Заказ принят и выполняется</p>
+                </div>
+                <div class="col-lg">
+                    <a href="cancelOrder.php?id='.$i['id'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+                ';
+              }
+              else if($i['status'] == '2'){
+                echo '<p style="color: green;">Заказ выполнен, курьер в пути</p>';
+              }
+              else if($i['status'] == '3'){
+                echo '<p style="color: red;">Заказ отменен</p>';
               }
               else if($i['status'] == 4){
                 echo '
-                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier&address='.$i['address'].'"><button type="button" name="button" class="done">Готово</button></a>
+                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier"><button type="button" name="button" class="done">Готово</button></a>
                 ';
               }
               else if($i['status'] == 5){
-                echo '<br><h2 style="color: green;">Заказ доставвлен</h2>';
+                echo '<p style="color: green;">Вы получили заказ</p>';
               }
               echo '
-              </div>
             </div>
-              ';
-          }
-
-          }
+          </div>
+          ';
+        }
       ?>
 
-  </div>
-  </div>
+      </div>
+      </div>
 
 
 </body>
