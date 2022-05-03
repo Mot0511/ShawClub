@@ -5,23 +5,26 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $email = $_POST['email'];
 $pass = $_POST['pass'];
 
-if ($email == 'admin' && $pass = '1324'){
+if ($email == 'admin' && $pass == '1324'){
   setcookie('login', $email, time() + (86400 * 30), '/');
   setcookie('pass', $pass, time() + (86400 * 30), '/');
   echo '<script>location="admin.php"</script>';
   exit;
 }
-else if ($email == 'point' && $pass = '1324'){
+else if ($email == 'point' && $pass == '1324'){
   setcookie('login', $email, time() + (86400 * 30), '/');
   setcookie('pass', $pass, time() + (86400 * 30), '/');
   echo '<script>location="point.php"</script>';
   exit;
 }
-else if ($email == 'carrier' && $pass = '1324'){
+else if ($email == 'carrier' && $pass == '1324'){
   setcookie('login', $email, time() + (86400 * 30), '/');
   setcookie('pass', $pass, time() + (86400 * 30), '/');
   echo '<script>location="carrier.php"</script>';
   exit;
+}
+else if ($email == 'carrier' or $email == 'point' or $email == 'admin'){
+  echo '<script>location="error.php?error=Неверный пароль&path=index.php"</script>';
 }
 
 $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
@@ -43,11 +46,6 @@ if (!$existsEmail){
   mysqli_query($link, "INSERT INTO users SET email='".$email."', password='".$pass."'");
   setcookie('login', $email, time() + (86400 * 30), '/');
   setcookie('pass', $pass, time() + (86400 * 30), '/');
-  // $cartElems_res = mysqli_query($link, 'SELECT email FROM users');
-  // for ($cartElems = []; $row = mysqli_fetch_assoc($cartElems_res); $cartElems[] = $row);
-  // foreach ($cartElems as $i){
-  //   $res = mysqli_query($link, "INSERT INTO cart SET name = '".$i['name']."', number = ".$i['number'].", email = '".$email."'");
-  // }
   echo '<script>location="profile.php?email='.$email.'"</script>';
 }
 else{
@@ -57,11 +55,6 @@ else{
   if ($password[0]['password'] == $pass){
     setcookie('login', $email, time() + (86400 * 30), '/');
     setcookie('pass', $pass, time() + (86400 * 30), '/');
-    // $cartElems_res = mysqli_query($link, 'SELECT email FROM users');
-    // for ($cartElems = []; $row = mysqli_fetch_assoc($cartElems_res); $cartElems[] = $row);
-    // foreach ($cartElems as $i){
-    //     mysqli_query($link, "INSERT INTO cart SET name = '".$i['name']."', number = ".$i['number'].", email = '".$email."'");
-    // }
     echo '<script>location="profile.php?email='.$email.'"</script>';
   }
   else{

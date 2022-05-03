@@ -162,7 +162,7 @@
             echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
           else if($_COOKIE['login'] == 'carrier'){
-            echo '<a href="admin.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
+            echo '<a href="carrier.php"><button type="button" class="profileBt" name="button">Перейти в<br>профиль</button></a>';
           }
           else{
             echo '<a href="cart.php?email='.$_COOKIE['login'].'"><img src="img/cart.png" class="cart" alt=""> </a>';

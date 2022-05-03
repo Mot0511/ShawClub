@@ -202,6 +202,26 @@ $page = basename(__FILE__);
     .cancel:hover{
       background-color: #CE0000;
     }
+    @media (max-width: 1000px){
+      .thing h2{
+        font-size: 50px;
+        color: white;
+      }
+      .thing p{
+        font-size: 40px;
+      }
+      .done, .statusBt{
+        width: 100%;
+        height: 60px;
+        font-size: 35px;
+      }
+      .cancel{
+        width: 100%;
+        height: 60px;
+        font-size: 30px;
+      }
+    }
+
     </style>
   </head>
   <body>

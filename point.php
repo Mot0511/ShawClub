@@ -216,6 +216,26 @@ $page = basename(__FILE__);
     .statusBt:hover{
       background-color: #870000;
     }
+    @media (max-width: 1000px){
+      .thing h2{
+        font-size: 50px;
+        color: white;
+      }
+      .thing p{
+        font-size: 40px;
+      }
+      .done, .statusBt{
+        width: 100%;
+        height: 60px;
+        font-size: 35px;
+      }
+      .cancel{
+        width: 100%;
+        height: 60px;
+        font-size: 30px;
+      }
+    }
+
     </style>
   </head>
   <body>
@@ -253,7 +273,7 @@ $page = basename(__FILE__);
             }
             else if($i['status'] == 2 or $i['status'] == 4){
               echo '<br><h2 style="color: green;">Заказ выполнен и отправлен курьеру</h2>';
-              echo '<a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'"><button type="button" name="button" class="cancel">Отпенить</button></a>';
+              echo '<a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'"><button type="button" name="button" class="cancel">Отменить</button></a>';
             }
             else if($i['status'] == 3){
               echo '<br><h2 style="color: red;">Заказ отменен исполнителем</h2>';

@@ -50,6 +50,21 @@
   font-size: 24px;
   margin-left: -100px;
 }
+@media (max-width: 1000px){
+  .image{
+    width: 100%;
+  }
+  .text{
+    margin-left: 100px;
+  }
+  .addToCart{
+    margin-left: -5px;
+    font-size: 30px;
+  }
+  .heading{
+    font-size: 35px;
+  }
+}
 </style>
 </head>
   <body>
@@ -65,7 +80,7 @@
         <div class="col-lg-4">
           <img src="img/products/<?php echo $image; ?>" class="image" alt="">
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 text">
           <p class="heading">Шаурма "<?php echo $name; ?>"</p>
           <p class="compound"><?php echo $compound; ?></p>
 
@@ -75,6 +90,5 @@
     <a href="addToCart.php?name=<?php echo $name; ?>&email=<?php echo $email; ?>"> <button type="button" class="addToCart" name="button">В корзину</button></a>
     </div>
     </div>
-    <?php require 'footer.html'; ?>
   </body>
 </html>

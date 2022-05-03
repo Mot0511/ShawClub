@@ -184,7 +184,5 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
 
       </div>
     </div>
-
-<?php require 'footer.html'; ?>
   </body>
 </html>

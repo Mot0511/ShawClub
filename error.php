@@ -19,6 +19,11 @@ $path = $_GET['path'];
       a{
         font-size: 25px;
       }
+      @media (max-width: 1000px){
+        a{
+          font-size: 40px;
+        }
+      }
     </style>
   </head>
   <body>
