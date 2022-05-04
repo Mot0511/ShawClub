@@ -220,7 +220,8 @@ $page = basename(__FILE__);
         height: 60px;
         font-size: 30px;
       }
-    }
+
+}
 
     </style>
   </head>

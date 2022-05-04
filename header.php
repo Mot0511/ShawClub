@@ -64,8 +64,18 @@
         margin-top: 20px;
       }
       @media (max-width: 1000px){
-        .label{
-
+        .menu a{
+          font-size: 35px;
+          margin-left: 27px;
+        }
+        .cart{
+          width: 80px;
+        }
+        .loginBt, .profileBt{
+          width: 90%;
+          height: 100px;
+          font-size: 30px;
+          margin-top: 20px;
         }
       }
     </style>
