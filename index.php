@@ -151,14 +151,14 @@ if (isset($_COOKIE['login']) and isset($_COOKIE['pass'])){
                         <div class="orderBts">
                         <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
                         <p>'.$j['name'].'</p>
-
+                        <h3>'.$j['price'].' р.</h3>
                         </a>';
                         if ($_COOKIE['login'] == ''){
                           echo '<button type="submit" class="addToCart" name="button" data-bs-toggle="modal" data-bs-target="#exampleModal" name="addToCart">В корзину</button>';
                         }
                         else{
                           if ($btAddToCart == 1){
-                            echo '<a href="addToCart.php?name='.$j['name'].'&email='.$login.'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
+                            echo '<a href="addToCart.php?name='.$j['name'].'&email='.$login.'&price='.$j['price'].'"><button type="submit" class="addToCart" name="addToCart">В корзину</button></a>';
                             if (in_array($j['name'], $cartProducts)){
                               echo '<a href="product.php?name='.$j['name'].'&compound='.$j['compound'].'&image='.$j['image'].'&email='.$login.'"><p>Уже есть в корзине</p>';
                             }

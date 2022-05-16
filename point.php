@@ -262,18 +262,18 @@ $page = basename(__FILE__);
             ';
             if ($i['status'] == 0){
               echo '
-              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
+              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
               ';
             }
             else if($i['status'] == 1){
               echo '
-              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=2&id='.$i['id'].'&page=point&address='.$i['address'].'"><button type="button" name="button" class="done">Готово</button></a>
-              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=3&id='.$i['id'].'&page=point&address='.$i['address'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
+              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=2&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="done">Готово</button></a>
+              <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=3&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="cancel">Отменить</button></a>
               ';
             }
             else if($i['status'] == 2 or $i['status'] == 4){
               echo '<br><h2 style="color: green;">Заказ выполнен и отправлен курьеру</h2>';
-              echo '<a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'"><button type="button" name="button" class="cancel">Отменить</button></a>';
+              echo '<a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="cancel">Отменить</button></a>';
             }
             else if($i['status'] == 3){
               echo '<br><h2 style="color: red;">Заказ отменен исполнителем</h2>';

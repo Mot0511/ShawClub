@@ -3,6 +3,7 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
 
   $name = $_GET['name'];
   $email = $_GET['email'];
+  $price = $_GET['price'];
 
   $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
   mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -15,10 +16,9 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
   mysqli_query($link, "DELETE FROM cart WHERE id = '".$cartProducts[0]['id']."'");
   $count = $count - 1;
   if ($count != 0){
-    mysqli_query($link, "INSERT INTO cart SET id = '".$cartProducts[0]['id']."', name = '".$name."', number = ".$count.", email = '".$email."' ");
-    echo '<script>location="cart.php?email='.$email.'"</script>';
+    mysqli_query($link, "INSERT INTO cart SET id = '".$cartProducts[0]['id']."', name = '".$name."', price = ".$price.", number = ".$count.", email = '".$email."' ");
   }
-
+echo '<script>location="cart.php?email='.$email.'"</script>';
   $link->close();
 
 ?>

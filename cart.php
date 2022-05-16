@@ -294,48 +294,69 @@ $page = basename(__FILE__);
   <div class="shawarma" id="shawarma">
     <div class="container">
       <?php
-      $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+        $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
 
         $email = $_GET['email'];
+        $totalPrice = 0;
         $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
         $res = mysqli_query($link, "SELECT * FROM cart WHERE email = '".$email."'");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
-        foreach ($data as $i){
-          echo '
-          <div class="row thing">
-            <div class="col-lg-10 ">
-              <h2>'.$i['name'].'</h2>
-              <div class="row numberControl">
-                <div class="col-lg-4">
-                <a href="addToCart.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">+</button></a>
+        if ($data != []){
+          foreach ($data as $i){
+            echo '
+            <div class="row thing">
+              <div class="col-lg-10 ">
+                <h2>'.$i['name'].'</h2>
+                <h2>'.$i['price'].' р./шт.</h2>
+                <div class="row numberControl">
+                  <div class="col-lg-4">
+                  <a href="addToCart.php?name='.$i['name'].'&email='.$login.'&price='.$i['price'].'"><button type="button" class="numberBt" name="button">+</button></a>
 
+                  </div>
+                  <div class="col-lg-4">
+                    <p>'.$i['number'].' шт.</p>
+                  </div>
+                  <div class="col-lg-4">
+                  <a href="minusNumber.php?name='.$i['name'].'&email='.$login.'&price='.$i['price'].'"><button type="button" class="numberBt" name="button">-</button></a>
+                  </div>
                 </div>
-                <div class="col-lg-4">
-                  <p>'.$i['number'].' шт.</p>
-                </div>
-                <div class="col-lg-4">
-                <a href="minusNumber.php?name='.$i['name'].'&email='.$login.'"><button type="button" class="numberBt" name="button">-</button></a>
-                </div>
+
               </div>
+              <div class="col-lg">
+                  <form method="post" action="">
+                  <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$login.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
+                  </form>
+              </div>
+            </div>
 
-            </div>
-            <div class="col-lg">
-                <form method="post" action="">
-                <a href="removeProductFromCart.php?id='.$i['id'].'&email='.$login.'"><button type="button" name="delete" class="cancel">Удалить</button></a>
-                </form>
-            </div>
-          </div>          ';
+            ';
+            $totalPrice += $i['price'];
+          }
+          echo '
+          <br>
+          <h1>Итого: '.$totalPrice.' руб.</h1>
+          <br>
+          <form class="" action="orderSend.php" method="post">
+            <input type="hidden" name="email" value="'.$email.'">
+            <input type="hidden" name="price" value="'.$totalPrice.'">
+            <input type="text" class="address" name="address" placeholder="Введите адрес доставки (город, улица, дом, квартира, код домофона)"><br>
+            <input type="submit" name="" class="orderSendBt" value="Отправить заказ с этими товарами">
+          </form>
+
+          ';
         }
+        else{
+          echo '
+            <h1>У Вас в корзине нет товаров</h1>
+          ';
+        }
+
       ?>
 
-      <form class="" action="orderSend.php" method="post">
-        <input type="hidden" name="email" value="<?php echo $email; ?>">
-        <input type="text" class="address" name="address" placeholder="Введите адрес доставки (город, улица, дом, квартира, код домофона)"><br>
-        <input type="submit" name="" class="orderSendBt" value="Отправить заказ с этими товарами">
-      </form>
+
 
 
       </div>

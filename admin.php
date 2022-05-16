@@ -208,6 +208,12 @@ $page = basename(__FILE__);
                   <input type="text" class="form-control" required id="inputCompound" name="group" value="" autocomplete="off">
                 </div>
               </div>
+              <div class="row mb-3">
+                <label for="inputPass" class="col-sm-2 col-form-label">Цена (рубль)</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" required id="inputCompound" name="price" value="" autocomplete="off">
+                </div>
+              </div>
               <input type="submit" class="btn btn-primary " name="button" value="Добавить товар">
             </form>
 
@@ -270,7 +276,8 @@ $page = basename(__FILE__);
                       <div class="orderBts">
                       <img src="img/products/'.$j['image'].'" class="imageProduct" alt="">
                       <p>'.$j['name'].'</p>
-                       <a href="removeProduct.php?id='.$j['id'].'"><button type="button" class="orderNow" class="remove" name="button">Удалить</button>
+                      <h3>'.$j['price'].' р.</h3>
+                      <a href="removeProduct.php?id='.$j['id'].'"><button type="button" class="orderNow" class="remove" name="button">Удалить</button>
                     </div>
                   </center>
                   </div></a>
