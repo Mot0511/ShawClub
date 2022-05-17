@@ -244,40 +244,45 @@ $page = basename(__FILE__);
       $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
-        $res = mysqli_query($link, "SELECT * FROM point");
+        $res = mysqli_query($link, "SELECT * FROM point ORDER BY id DESC");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
-        foreach ($data as $i){
-          if ($i['status'] == 2 or $i['status'] == 4 or $i['status'] == 5){
-            echo '
-            <div class="row thing">
-              <div class="col-lg-6">
-                <h2>'.$i['products'].'</h2>
-                <p>'.$i['number'].', '.$i['address'].'</p>
-                <h3 style="color: white;">Стоимость: '.$i['price'].' руб.</h3>
-              </div>
-              <div class="col-lg-6">
-              ';
-              if ($i['status'] == 2){
-                echo '
-                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
-                ';
-              }
-              else if($i['status'] == 4){
-                echo '
-                <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="done">Готово</button></a>
-                ';
-              }
-              else if($i['status'] == 5){
-                echo '<br><h2 style="color: green;">Заказ доставвлен</h2>';
-              }
+        if ($data != []){
+          foreach ($data as $i){
+            if ($i['status'] == 2 or $i['status'] == 4 or $i['status'] == 5){
               echo '
+              <div class="row thing">
+                <div class="col-lg-6">
+                  <h2>'.$i['products'].'</h2>
+                  <p>'.$i['number'].', '.$i['address'].'</p>
+                  <h3 style="color: white;">Стоимость: '.$i['price'].' руб.</h3>
+                </div>
+                <div class="col-lg-6">
+                ';
+                if ($i['status'] == 2){
+                  echo '
+                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
+                  ';
+                }
+                else if($i['status'] == 4){
+                  echo '
+                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="done">Готово</button></a>
+                  ';
+                }
+                else if($i['status'] == 5){
+                  echo '<br><h2 style="color: green;">Заказ доставвлен</h2>';
+                }
+                echo '
+                </div>
               </div>
-            </div>
-              ';
-          }
+                ';
+            }
 
-          }
+            }
+        }
+        else{
+          echo '<h1>Заказов пока нет</h1>';
+        }
       ?>
 
   </div>

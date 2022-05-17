@@ -236,7 +236,7 @@ $page = basename(__FILE__);
       $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
-        $res = mysqli_query($link, "SELECT * FROM point WHERE email = '".$login."'");
+        $res = mysqli_query($link, "SELECT * FROM point WHERE email = '".$login."' ORDER BY id DESC");
         for ($data = []; $row = mysqli_fetch_assoc($res); $data[] = $row);
 
         foreach ($data as $i){
