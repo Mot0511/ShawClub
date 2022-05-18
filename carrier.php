@@ -249,6 +249,8 @@ $page = basename(__FILE__);
 
         if ($data != []){
           foreach ($data as $i){
+            if ($i['carrier'] == $login){
+              $isOrders = true;
             if ($i['status'] == 2 or $i['status'] == 4 or $i['status'] == 5){
               echo '
               <div class="row thing">
@@ -277,10 +279,10 @@ $page = basename(__FILE__);
               </div>
                 ';
             }
-
+}
             }
         }
-        else{
+        if (!$isOrders){
           echo '<h1>Заказов пока нет</h1>';
         }
       ?>

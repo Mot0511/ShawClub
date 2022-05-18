@@ -16,6 +16,6 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
   }
 
   $number = rand(0, 999999);
-  mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."'");
+  mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point = 'point'");
   echo '<script>location="profile.php"</script>';
 ?>
