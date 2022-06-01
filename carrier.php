@@ -263,12 +263,12 @@ $page = basename(__FILE__);
                 ';
                 if ($i['status'] == 2){
                   echo '
-                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
+                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'&carrier='.$login.'&point='.$i['point'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
                   ';
                 }
                 else if($i['status'] == 4){
                   echo '
-                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'"><button type="button" name="button" class="done">Готово</button></a>
+                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=5&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'&carrier='.$login.'&point='.$i['point'].'"><button type="button" name="button" class="done">Готово</button></a>
                   ';
                 }
                 else if($i['status'] == 5){
