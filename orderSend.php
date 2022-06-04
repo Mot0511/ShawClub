@@ -39,24 +39,13 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
     $numberPoints = 0;
   }
 
-  for ($j = 0; $j < count($numberInPoints) - 1; $j++){
-    for ($i = 0; $i < count($numberInPoints) - $j - 1; $i++){
-        // если текущий элемент больше следующего
-        if ($numberInPoints[$points[$i]] > $numberInPoints[$points[$i + 1]]){
-            // меняем местами элементы
-            $tmp_var = $numberInPoints[$points[$i + 1]];
-            $numberInPoints[$points[$i + 1]] = $numberInPoints[$points[$i]];
-            $numberInPoints[$points[$i]] = $tmp_var;
-        }
-    }
+asort($numberInPoints);
+
+foreach ($data as $i){
+  $product = $product.$i['name'].' '.(string) $i['number'].'x, ';
 }
-print_r($numberInPoints[array_key_first($numberInPoints)]);
-  // echo '<br>';
-  // foreach ($data as $i){
-  //   $product = $product.$i['name'].' '.(string) $i['number'].'x, ';
-  // }
-  //
-  // $number = rand(0, 999999);
-  // mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point = 'point'");
-  // echo '<script>location="profile.php"</script>';
+
+$number = rand(0, 999999);
+mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point = '".array_key_first($numberInPoints)."'");
+echo '<script>location="profile.php"</script>';
 ?>
