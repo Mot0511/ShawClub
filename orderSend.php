@@ -48,5 +48,5 @@ foreach ($data as $i){
 
 $number = rand(0, 999999);
 mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point = '".array_key_first($numberInPoints)."'");
-echo '<script>location="profile.php?noList='.$noList.'"</script>';
+echo '<script>location="profile.php"</script>';
 ?>

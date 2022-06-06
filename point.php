@@ -262,13 +262,14 @@ $page = basename(__FILE__);
                 <div class="col-lg-6">
                   <h2>'.$i['products'].'</h2>
                   <p>'.$i['number'].'</p>
+                  '.print_r($noList).'
                 </div>
                 <div class="col-lg-6">
                 ';
                 if ($i['status'] == 0){
                   echo '
                   <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'&point='.$login.'&carrier=carrier"><button type="button" name="button" class="done">Принять</button> </a>
-                  <a href="selectOtherPoint.php?noList='.$noList.'&newPointToList='.$login.'"><button type="button" name="button" class="cancel">Отменить</button> </a>
+                  <a href="selectOtherPoint.php?id='.$i['id'].'&products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=0&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'&noList[]='.$noList.'&newPointToList='.$login.'"><button type="button" name="button" class="cancel">Отменить</button> </a>
                   ';
                 }
                 else if($i['status'] == 1){

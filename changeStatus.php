@@ -45,7 +45,6 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
     }
 
     asort($numberInPoints);
-
     mysqli_query($link, "INSERT INTO point SET products = '".$products."', price = ".$price.", number = '".$number."', email = '".$email."', status = '".$status."', address = '".$address."', point = '".$point."', carrier = '".array_key_first($numberInPoints)."'");
   }
   else if ($status >= 2 and $status != 3){
@@ -60,6 +59,6 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
     echo 3;
   }
 
-  // echo '<script>location="'.$page.'.php"</script>';
+  echo '<script>location="'.$page.'.php?noList[]='.$noList.'"</script>';
 
 ?>

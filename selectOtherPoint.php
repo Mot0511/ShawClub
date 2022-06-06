@@ -1,7 +1,21 @@
 <?php
-$DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
+  $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
   $noList = $_GET['noList'];
   $newPointToList = $_GET['newPointToList'];
+  $points = [];
+  $ppoints = [];
+  $numberPoints = 0;
+  $numberInPoints = [];
+  $status = $_GET['status'];
+  $id = $_GET['id'];
+  $products = $_GET['products'];
+  $number = $_GET['number'];
+  $email = $_GET['email'];
+  $page = $_GET['page'];
+  $address = $_GET['address'];
+  $price = $_GET['price'];
+  $id = $_GET['id'];
+
 
   array_push($noList, $newPointToList);
 
@@ -22,19 +36,25 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
     array_push($points, $i['email']);
   }
 
-  $ppoint = array_diff($ppoint, $noList);
+  $ppoints = array_diff($ppoints, $noList);
+  $points = array_diff($points, $noList);
 
-  print_r($ppoint);
-//   foreach ($points as $i){
-//     foreach ($ppoints as $j){
-//       if ($i == $j){
-//         $numberPoints++;
-//       }
-//     }
-//     $numberInPoints += [$i => $numberPoints];
-//     $numberPoints = 0;
-//   }
-//
-// asort($numberInPoints);
+  foreach ($points as $i){
+    foreach ($ppoints as $j){
+      if ($i == $j){
+        $numberPoints++;
+      }
+    }
+    $numberInPoints += [$i => $numberPoints];
+    $numberPoints = 0;
+  }
+
+asort($numberInPoints);
+
+print_r($numberInPoints);
+mysqli_query($link, "DELETE FROM point WHERE id = '".$id."'");
+
+mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point = '".array_key_first($numberInPoints)."'");
+echo '<script>location="'.$page.'.php"</script>';
 
 ?>
