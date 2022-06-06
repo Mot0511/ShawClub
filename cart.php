@@ -333,7 +333,7 @@ $page = basename(__FILE__);
             </div>
 
             ';
-            $totalPrice += $i['price'];
+            $totalPrice += $i['price'] * $i['number'];
           }
           echo '
           <br>

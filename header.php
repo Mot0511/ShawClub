@@ -137,7 +137,7 @@
           $id = 0;
           $idBr = 3;
           foreach ($groups as $i){
-            echo '<a href="#'.$id.'">'.$i.'</a>';
+            echo '<a href="index.php#'.$id.'">'.$i.'</a>';
             $id += 1;
             if ($id == $idBr){
               echo '<br>';
