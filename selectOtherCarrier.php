@@ -57,5 +57,5 @@ mysqli_query($link, "DELETE FROM point WHERE id = '".$id."'");
 
 mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point='".$thisPoint."', carrier = '".array_key_first($numberInPoints)."'");
 echo '<script>location="'.$page.'.php"</script>';
-
+werwerwer
 ?>
