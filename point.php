@@ -244,6 +244,7 @@ $page = basename(__FILE__);
     <div class="container">
       <?php
         $isOrders = false;
+        $noList = $_GET['noList'];
         $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
 
         $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
@@ -266,7 +267,8 @@ $page = basename(__FILE__);
                 ';
                 if ($i['status'] == 0){
                   echo '
-                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'&point='.$login.'&carrier=carrier"><button type="button" name="button" class="statusBt">Принять</button> </a>
+                  <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=1&id='.$i['id'].'&page=point&address='.$i['address'].'&price='.$i['price'].'&point='.$login.'&carrier=carrier"><button type="button" name="button" class="done">Принять</button> </a>
+                  <a href="selectOtherPoint.php?noList='.$noList.'&newPointToList='.$login.'"><button type="button" name="button" class="cancel">Отменить</button> </a>
                   ';
                 }
                 else if($i['status'] == 1){

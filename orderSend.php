@@ -9,6 +9,7 @@ $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB
   $ppoints = [];
   $numberPoints = 0;
   $numberInPoints = [];
+  $noList = [];
 
   $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
   mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
@@ -47,5 +48,5 @@ foreach ($data as $i){
 
 $number = rand(0, 999999);
 mysqli_query($link, "INSERT INTO point SET products = '".$product."', price = ".$price.", number = '".$number."', email = '".$email."', status = 0, address = '".$address."', point = '".array_key_first($numberInPoints)."'");
-echo '<script>location="profile.php"</script>';
+echo '<script>location="profile.php?noList='.$noList.'"</script>';
 ?>
