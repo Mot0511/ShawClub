@@ -262,7 +262,6 @@ $page = basename(__FILE__);
                 <div class="col-lg-6">
                   <h2>'.$i['products'].'</h2>
                   <p>'.$i['number'].'</p>
-                  '.print_r($noList).'
                 </div>
                 <div class="col-lg-6">
                 ';

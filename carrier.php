@@ -240,7 +240,7 @@ $page = basename(__FILE__);
       <?php
       $DBdata = [file_get_contents('data/hostDB.txt'), file_get_contents('data/loginDB.txt'), file_get_contents('data/passwordDB.txt'), file_get_contents('data/nameDB.txt')];
       mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
+      $noList = $_GET['noList'];
       $link = mysqli_connect($DBdata[0], $DBdata[1], $DBdata[2], $DBdata[3]);
         mysqli_set_charset($link, 'utf8');
 
@@ -264,6 +264,7 @@ $page = basename(__FILE__);
                 if ($i['status'] == 2){
                   echo '
                   <a href="changeStatus.php?products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=4&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'&carrier='.$login.'&point='.$i['point'].'"><button type="button" name="button" class="statusBt">Принять</button> </a>
+                  <a href="selectOtherCarrier.php?id='.$i['id'].'&products='.$i['products'].'&number='.$i['number'].'&email='.$i['email'].'&status=0&id='.$i['id'].'&page=carrier&address='.$i['address'].'&price='.$i['price'].'&noList[]='.$noList.'&newPointToList='.$login.'&point='.$i['point'].'"><button type="button" name="button" class="cancel">Отменить</button> </a>
                   ';
                 }
                 else if($i['status'] == 4){
